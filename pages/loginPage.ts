@@ -13,7 +13,7 @@ export default class LoginPage {
     this.loginBtn = page.locator('button[data-qa="login-button"]');
   }
 
-  async navigateToLoginPage() {
+  async goTo() {
     await this.page.goto('login');
   }
 

@@ -1,12 +1,9 @@
-import { test } from '@playwright/test';
-import LoginPage from '../pages/loginPage';
+import { test } from '../helper/fixture';
 
 const userEmail = process.env.USER_EMAIL!;
 const userPassword = process.env.USER_PASSWORD!;
 
-test('Verify login successfully', async ({ page }) => {
-  const loginPage = new LoginPage(page);
-
+test('Verify login successfully', async ({ loginPage }) => {
   await test.step('Given user open login screen', async () => {
     await loginPage.goTo();
     await loginPage.isDisplayLoginPage();
