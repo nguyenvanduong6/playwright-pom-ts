@@ -1,3 +1,5 @@
+# Ignore auth file
+.auth
 #env
 .env*
 !.env.example
