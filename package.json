@@ -5,9 +5,8 @@
   "scripts": {
     "test-run": "ENV=example npx playwright test",
     "test-head": "ENV=example npx playwright test --headed",
-
     "report": "npx playwright show-report",
-
+    "generate-auth": "npx ts-node helper/generate-auth.ts example",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write ."
   },
@@ -24,6 +23,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   },
   "dependencies": {
