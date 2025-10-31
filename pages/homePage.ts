@@ -15,4 +15,9 @@ export default class HomePage {
     await expect(this.logoutNavItem).toHaveText('Logout');
     await expect(this.page.getByText('Logged in as Finn')).toBeVisible();
   }
+
+  async isInvalidLoggedIn() {
+    await expect(this.logoutNavItem).toHaveText('Wrong text');
+    await expect(this.page.getByText('Logged in as Wrong User')).toBeVisible();
+  }
 }
