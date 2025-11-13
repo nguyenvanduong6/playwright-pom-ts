@@ -19,7 +19,8 @@ runs:
       id: runWithAllSpecs
       shell: ${{ inputs.SHELL_TYPE }}
       run: |
-        if: ${{ inputs.BROWSER_RUN == 'all' }}        
+        if ${{ inputs.BROWSER_RUN == 'all' }}; then    
           (ENV=example playwright test) || true
         else
           (ENV=example playwright test --project=${{ inputs.BROWSER_RUN }}) || true
+        fi
