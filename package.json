@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test-run": "ENV=example npx playwright test",
-    "test-run:example-firefox": "ENV=example npx playwright test --project=firefox",
-    "test-head": "ENV=example npx playwright test --headed",
+    "test-run": "ENV=example playwright test",
+    "test-run:example-firefox": "ENV=example playwright test --project=firefox",
+    "test-head": "ENV=example playwright test --headed",
     "report": "allure serve allure-results",
-    "generate-auth": "npx ts-node helper/generate-auth.ts example",
+    "generate-auth": "ts-node helper/generate-auth.ts example",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write ."
   },

@@ -20,6 +20,6 @@ runs:
       shell: ${{ inputs.SHELL_TYPE }}
       run: |
         if: ${{ inputs.BROWSER_RUN == 'all' }}        
-          (ENV=example npx playwright test) || true
+          (ENV=example playwright test) || true
         else
-          (ENV=example npx playwright test --project=${{ inputs.BROWSER_RUN }}) || true
+          (ENV=example playwright test --project=${{ inputs.BROWSER_RUN }}) || true

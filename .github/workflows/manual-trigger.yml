@@ -25,27 +25,27 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  test:
-      timeout-minutes: 60
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v5
-          # Control git fetch commit, 20 mean clone the last 20 commits, use for check file changes
-          with:
-            fetch-depth: 20
+  ubuntu-run:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        # Control git fetch commit, 20 mean clone the last 20 commits, use for check file changes
+        with:
+          fetch-depth: 20
 
-        - name: NPM install
-          uses: ./.github/actions/install-run
-          # Require shell type when use composite action and handle different OS window/linux
-          with:
-            SHELL_TYPE: 'bash'
+      - name: NPM install
+        uses: ./.github/actions/install-run
+        # Require shell type when use composite action and handle different OS window/linux
+        with:
+          SHELL_TYPE: 'bash'
 
-        - name: Run Playwright tests
-          uses: ./.github/actions/playwright-run
-          with:
-            SHELL_TYPE: 'bash'
-            OS_RUN: 'Ubuntu'
-            BROWSER_RUN: ${{ github.event.inputs.browser}}
+      - name: Run Playwright tests
+        uses: ./.github/actions/playwright-run
+        with:
+          SHELL_TYPE: 'bash'
+          OS_RUN: 'Ubuntu'
+          BROWSER_RUN: ${{ github.event.inputs.browser}}
 
-        # Danger check
+      # Danger check
