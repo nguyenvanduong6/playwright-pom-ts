@@ -15,6 +15,12 @@ runs:
   # Composite is define group of steps, no runtime for each step
   using: 'composite'
   steps:
+    - name: Get user context
+      id: getUserContext
+      shell: ${{ inputs.SHELL_TYPE }}
+      run: |
+        npm run generate-auth
+
     - name: Run test with all specs option
       id: runWithAllSpecs
       shell: ${{ inputs.SHELL_TYPE }}
