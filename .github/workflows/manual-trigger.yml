@@ -18,7 +18,7 @@ on:
         # The data type of the input
         type: choice
         options:
-          - chrome
+          - chromium
           - firefox
           - webkit
           - all
@@ -29,18 +29,23 @@ jobs:
       timeout-minutes: 60
       runs-on: ubuntu-latest
       steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
-        with:
-          node-version: lts/*
-      - name: Install dependencies
-        run: npm ci
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        uses: ./.github/actions/playwright-run
-        with:
-          OS_RUN: 'Ubuntu'
-          BROWSER_RUN: ${{ github.event.inputs.browser}}
+        - name: Checkout
+          uses: actions/checkout@v5
+          # Control git fetch commit, 20 mean clone the last 20 commits, use for check file changes
+          with:
+            fetch-depth: 20
 
-      # Danger check
+        - name: NPM install
+          uses: ./.github/actions/install-run
+          # Require shell type when use composite action and handle different OS window/linux
+          with:
+            SHELL_TYPE: 'bash'
+
+        - name: Run Playwright tests
+          uses: ./.github/actions/playwright-run
+          with:
+            SHELL_TYPE: 'bash'
+            OS_RUN: 'Ubuntu'
+            BROWSER_RUN: ${{ github.event.inputs.browser}}
+
+        # Danger check
