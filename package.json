@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test-run": "ENV=example npx playwright test",
+    "test-run:example-firefox": "ENV=example npx playwright test --project=firefox",
     "test-head": "ENV=example npx playwright test --headed",
-    "report": "npx playwright show-report",
+    "report": "allure serve allure-results",
     "generate-auth": "npx ts-node helper/generate-auth.ts example",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write ."
