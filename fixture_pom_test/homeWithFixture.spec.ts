@@ -1,22 +1,25 @@
-import { test } from '../helper/fixtures';
-import { expect } from '../helper/fixtures';
+import { test, expect } from '../fixtures/fixtures';
 
-test('Verify user logged in', async ({ homePage }) => {
-  await test.step('Given User open Login screen', async () => {
-    await homePage.goTo();
+test.describe.only('Home page tests with user authentication', () => {
+  test.use({ role: 'user' });
+
+  test('Verify user logged in', async ({ homePage }) => {
+    await test.step('Given User open Login screen', async () => {
+      await homePage.goTo();
+    });
+
+    await test.step('Then User should be logged in', async () => {
+      await homePage.isLoggedIn();
+    });
   });
 
-  await test.step('Then User should be logged in', async () => {
-    expect(homePage.isLoggedIn()).toBeTruthy();
-  });
-});
+  test('Verify test case failed', async ({ homePage }) => {
+    await test.step('Given User open Login screen', async () => {
+      await homePage.goTo();
+    });
 
-test('Verify test case failed', async ({ homePage }) => {
-  await test.step('Given User open Login screen', async () => {
-    await homePage.goTo();
-  });
-
-  await test.step('Then User should be wrong data logged in', async () => {
-    expect(homePage.isInvalidLoggedIn()).toBeTruthy();
+    await test.step('Then User should be wrong data logged in', async () => {
+      await homePage.isInvalidLoggedIn();
+    });
   });
 });

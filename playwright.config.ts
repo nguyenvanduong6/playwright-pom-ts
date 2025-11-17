@@ -15,8 +15,8 @@ dotenv.config({
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  //testDir: 'fixture_pom_test',
-  testMatch: 'fixture_pom_test/homeWithFixture.spec.ts',
+  testDir: 'fixture_pom_test',
+  //testMatch: 'fixture_pom_test/homeWithFixture.spec.ts',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */

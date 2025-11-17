@@ -1,4 +1,4 @@
-import { test } from '../helper/fixtures';
+import { test } from '../fixtures/fixtures';
 
 const userEmail = process.env.USER_EMAIL!;
 const userPassword = process.env.USER_PASSWORD!;
