@@ -50,5 +50,6 @@ jobs:
           SHELL_TYPE: 'bash'
           OS_RUN: 'Ubuntu'
           BROWSER_RUN: ${{ github.event.inputs.browser}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Danger check

@@ -11,6 +11,10 @@ inputs:
     description: 'Which browser run test'
     required: true
     default: 'chrome'
+  GITHUB_TOKEN:
+    description: 'Github Token used to deploy GH pages'
+    required: true
+
 runs:
   # Composite is define group of steps, no runtime for each step
   using: 'composite'
@@ -55,7 +59,7 @@ runs:
       if: ${{ steps.runWithAllSpecs.outcome == 'success' }}
       with:
         # Auto create github_token when run workflow
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ inputs.GITHUB_TOKEN }}
         publish_branch: gh-pages
         publish_dir: allure-report
 
