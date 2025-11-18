@@ -30,3 +30,40 @@ runs:
         else
           (ENV=example npx playwright test --project=${{ inputs.BROWSER_RUN }}) || true
         fi
+
+  # Allure Report Generation steps
+    - name: Get Allure history
+      uses: actions/checkout@v5
+      if: ${{ steps.runWithAllSpecs.outcome == 'success' }}
+      continue-on-error: true
+      with:
+        ref: gh-pages
+        path: gh-pages
+
+    - name: Generate Allure report
+      uses: simple-elf/allure-report-action@master
+      if: ${{ steps.runWithAllSpecs.outcome == 'success' }}
+      id: allure-report
+      with:
+        allure_results: allure-results
+        gh_pages: gh-pages
+        allure_report: allure-report
+        allure_history: allure-history
+
+    - name: Deploy report to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      if: ${{ steps.runWithAllSpecs.outcome == 'success' }}
+      with:
+        # Auto create github_token when run workflow
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: gh-pages
+        publish_dir: allure-report
+
+    - name: Upload Allure report as artifact
+      uses: actions/upload-artifact@v4
+      if: ${{ steps.runWithAllSpecs.outcome == 'success' }}
+      with:
+        name: allure-report
+        path: allure-report
+        retention-days: 30
+

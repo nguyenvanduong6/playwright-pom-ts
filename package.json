@@ -8,6 +8,7 @@
     "test-head": "ENV=example npx playwright test --headed",
     "report": "allure serve allure-results",
     "report:clean": "rm -rf allure-results allure-report",
+    "gen-report": "allure generate allure-results --clean allure-report",
     "generate-auth": "npx ts-node fixtures/auth.fixtures.ts example",
     "lint": "eslint . --ext .ts,.tsx",
     "format": "prettier --write ."

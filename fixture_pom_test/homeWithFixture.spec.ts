@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures/fixtures';
 
-test.describe.only('Home page tests with user authentication', () => {
+test.describe('Home page tests with user authentication', () => {
   test.use({ role: 'user' });
 
   test('Verify user logged in', async ({ homePage }) => {
