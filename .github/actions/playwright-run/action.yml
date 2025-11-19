@@ -36,45 +36,29 @@ runs:
         fi
 
   # Allure Report Generation steps
-    - name: Generate Allure report
-      if: ${{ steps.runWithAllSpecs.outcome == 'success' }}
-      id: createAllureReport
-      shell: ${{ inputs.SHELL_TYPE }}
-      run: |
-        npm run gen-report
-
-    - name: Get Allure history
-      if: ${{ steps.runWithAllSpecs.outcome == 'success' }}
-      uses: actions/checkout@v5
+    - name: Load test report history
+      uses: actions/checkout@v3
+      if: always()
       continue-on-error: true
       with:
         ref: gh-pages
-        fetch-depth: 0
         path: gh-pages
 
-    - name: Debug GH Pages content
-      shell: ${{ inputs.SHELL_TYPE }}
-      run: ls -R gh-pages
-
-    - name: Copy Allure history
-      if: ${{ steps.runWithAllSpecs.outcome == 'success' }}
-      continue-on-error: true
-      shell: ${{ inputs.SHELL_TYPE }}
-      run: |
-          echo "This is Copy Allure history step"
-          if [ -d "gh-pages/history" ]; then
-            mkdir -p allure-results/history
-            cp -r gh-pages/history/* allure-results/history/
-          fi
-
-    - name: Deploy report to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
-      if: ${{ steps.createAllureReport.outcome == 'success' }}
+    - name: Build test report
+      uses: simple-elf/allure-report-action@v1.7
+      if: always()
       with:
-        # Auto create github_token when run workflow
+        gh_pages: gh-pages
+        allure_history: allure-history
+        allure_results: build/allure-results
+
+    - name: Publish test report
+      uses: peaceiris/actions-gh-pages@v3
+      if: always()
+      with:
         github_token: ${{ inputs.GITHUB_TOKEN }}
         publish_branch: gh-pages
-        publish_dir: allure-report
+        publish_dir: allure-history
 
     - name: Upload Allure report as artifact
       uses: actions/upload-artifact@v4
