@@ -12,4 +12,5 @@ runs:
       shell: ${{ inputs.SHELL_TYPE }}
       run: |
         npm ci
+        npm install -g allure-commandline --no-save
         npx playwright install --with-deps
