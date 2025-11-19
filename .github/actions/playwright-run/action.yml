@@ -57,7 +57,7 @@ runs:
       run: ls -R gh-pages
 
     - name: Copy Allure history
-      if: ${{ steps.getAllureHistoryOnGhPages.outcome == 'success' }}
+      if: ${{ steps.runWithAllSpecs.outcome == 'success' }}
       continue-on-error: true
       shell: ${{ inputs.SHELL_TYPE }}
       run: |
@@ -69,7 +69,7 @@ runs:
 
     - name: Deploy report to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
-      if: ${{ steps.allure-report.outcome == 'success' }}
+      if: ${{ steps.createAllureReport.outcome == 'success' }}
       with:
         # Auto create github_token when run workflow
         github_token: ${{ inputs.GITHUB_TOKEN }}
@@ -78,7 +78,7 @@ runs:
 
     - name: Upload Allure report as artifact
       uses: actions/upload-artifact@v4
-      if: ${{ steps.allure-report.outcome == 'success' }}
+      if: ${{ steps.createAllureReport.outcome == 'success' }}
       with:
         name: allure-report
         path: allure-report
