@@ -52,11 +52,16 @@ runs:
         fetch-depth: 0
         path: gh-pages
 
+    - name: Debug GH Pages content
+      shell: ${{ inputs.SHELL_TYPE }}
+      run: ls -R gh-pages
+
     - name: Copy Allure history
       if: ${{ steps.getAllureHistoryOnGhPages.outcome == 'success' }}
       continue-on-error: true
       shell: ${{ inputs.SHELL_TYPE }}
       run: |
+          echo "This is Copy Allure history step"
           if [ -d "gh-pages/history" ]; then
             mkdir -p allure-results/history
             cp -r gh-pages/history/* allure-results/history/
