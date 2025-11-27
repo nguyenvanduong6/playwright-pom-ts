@@ -38,6 +38,6 @@ jobs:
         with:
           SHELL_TYPE: 'bash'
           OS_RUN: 'Ubuntu'
-          BROWSER_RUN: 'chromium'
+          BROWSER_RUN: 'chrome'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

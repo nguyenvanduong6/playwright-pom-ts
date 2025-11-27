@@ -10,7 +10,7 @@ inputs:
   BROWSER_RUN:
     description: 'Which browser run test'
     required: true
-    default: 'chromium'
+    default: 'chrome'
   GITHUB_TOKEN:
     description: 'Github Token used to deploy GH pages'
     required: true
