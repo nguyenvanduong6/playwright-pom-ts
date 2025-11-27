@@ -1,3 +1,4 @@
+.DS_Store
 # Ignore auth file
 .auth
 #env
