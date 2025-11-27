@@ -3,6 +3,7 @@ import { test, expect } from '../fixtures/fixtures';
 /**
  * Example test using guest role (no authentication) - default role
  */
+//trigger pr-check
 test('Guest user can view login page', async ({ loginPage, role }) => {
   await test.step('Given guest user opens login screen', async () => {
     await loginPage.goTo();
