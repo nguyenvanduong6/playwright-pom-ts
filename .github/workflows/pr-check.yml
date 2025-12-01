@@ -9,8 +9,7 @@ on:
       - develop
 
 permissions:
-  contents: read
-  pull-requests: write
+  contents: write
 
 jobs:
   ubuntu-run:
